@@ -12,6 +12,17 @@ SimpleAPI is the simplest way for you to create an API server using PHP. It defi
 
 **Methods** are class methods or functions which belong to the controller.
 
+Below is how the directory structure should look
+```
+simple-api
+└───api
+    └───version
+        │   controller.php
+        │   controller_two.php
+        │   ...
+
+```
+
 ## Sample API Method
 Below is the code for a sample method:
 
