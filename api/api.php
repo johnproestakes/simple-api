@@ -19,7 +19,6 @@ class SimpleAPI {
         }
         return self::$_instance;
     	}
-
 	public function requestMethod(){
 		return $_SERVER['REQUEST_METHOD'];
 	}

@@ -3,15 +3,22 @@
 include 'api.php';
 
 class APIRouter {
-  function basePath(){
+  private function basePath(){
     $pop = explode("/",$_SERVER['SCRIPT_NAME']);
     array_pop($pop);
     return implode('/',$pop);
   }
-  function determineRoute(){
-    return explode('/',substr($_SERVER['REDIRECT_URL'],
+  private function hyphenToUnderscore($value){
+    $value = str_replace('-', '_', $value);
+    return $value;
+  }
+  private function determineRoute(){
+    $route = explode('/',substr($_SERVER['REDIRECT_URL'],
       strlen($this->basePath())+1,
       strlen($_SERVER['REDIRECT_URL'])));
+      $route = array_map(array($this,'hyphenToUnderscore'), $route);
+      print_r($route);
+    return $route;
   }
   function routeToController(){
     $directive = $this->determineRoute();
@@ -31,36 +38,33 @@ class APIRouter {
 }
 $router = new APIRouter();
 
-$directory = '.';
-$scanned_directory = array_diff(scandir($directory), array('..', '.'));
-foreach($scanned_directory as $dir){
-  if(is_dir($dir)){
-    //this is a file that contains items;
-    $more = array_diff(scandir($dir), array('..', '.'));
-    print_r($more);
-    foreach($more as $item){
-      include $dir. '/'.$item;
-      $class = explode('.',$item);
-      array_pop($class);
-      $class = implode('.', $class);
-      if(class_exists($class)){
-        echo $class . ":<br>";
-        print_r(array_diff(get_class_methods($class), array('__construct')));
-      }
-
-    }
-  }
-  echo $dir . "<br>";
-}
-
-
-
-
-//$router->routeToController();
+//
+// $directory = '.';
+// $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+// foreach($scanned_directory as $dir){
+//   if(is_dir($dir)){
+//     //this is a file that contains items;
+//     $more = array_diff(scandir($dir), array('..', '.'));
+//     print_r($more);
+//     foreach($more as $item){
+//       include $dir. '/'.$item;
+//       $class = explode('.',$item);
+//       array_pop($class);
+//       $class = implode('.', $class);
+//       if(class_exists($class)){
+//         echo $class . ":<br>";
+//         print_r(array_diff(get_class_methods($class), array('__construct')));
+//       }
+//
+//     }
+//   }
+//   echo $dir . "<br>";
+// }
 
 
-// print_r($pop);
-// print_r();
-// print_r($_SERVER);
+
+
+$router->routeToController();
+
 
  ?>
