@@ -16,13 +16,13 @@ SimpleAPI is the simplest way for you to create an API server using PHP. It defi
 Below is the code for a sample method:
 
 ```php
-    class hello {
-      public function world(){
-        $API = SimpleAPI::getInstance();
-        $API->setParameter('response', 'hello world');
-        $API->sendResponse();
-      }
+class hello {
+  public function world(){
+    $API = SimpleAPI::getInstance();
+    $API->setParameter('response', 'hello world');
+    $API->sendResponse();
     }
+  }
 ```
 
 When you go to the following request uri: /v1/hello/world, you will see the following response:

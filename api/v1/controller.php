@@ -1,10 +1,10 @@
 <?php if(!defined('BASEPATH'))die('No direct script access.');
 
-class activity {
-	function another_method(){}
-	function invoke(){
+class controller {
+	function some_method(){}
+	function another_method(){
 		$API = SimpleAPI::getInstance();
-		$API->setParameter('response', array('really cool'));
+		$API->setParameter('response', 'hello world');
 		$API->sendResponse();
 	}
 	function __construct(){

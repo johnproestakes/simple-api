@@ -1,3 +1,1 @@
-<?php
-
-//die('Not for you');
+<?php if(!defined('BASEPATH')) die('You dont belong here.');
