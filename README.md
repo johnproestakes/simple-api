@@ -63,4 +63,5 @@ class hello {
   }
 ```
 The above method will return the following response:
+
     {"errors":["There is no Earth!"], "status":"400"}
