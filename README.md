@@ -40,3 +40,21 @@ class hello {
 When you go to the following request uri: /v1/hello/world, you will see the following response:
 
     {status:"200", response:"hello world"}
+
+## Log errors
+It's easy to log and set errors. The code below will do the trick:
+
+```php
+class hello {
+  public function world(){
+    $API = SimpleAPI::getInstance();
+    if(!isset($earth)){
+      $API->statusCode("400");
+      $API->logError("There is not Earth!");
+    } else {
+      $API->setParameter('response', 'hello world');
+    }
+    $API->sendResponse();
+    }
+  }
+```
