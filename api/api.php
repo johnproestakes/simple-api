@@ -33,17 +33,22 @@ class SimpleAPI {
 	// 	}
 	public function logError($issue){
 		$this->errors[] = $issue;
+		return $this;
 		}
-
+	public function statusCode($code){
+		$this->status = $code;
+		return $this;
+	}
 	private $response = array();
 	private $errors;
+	private $status;
 
 	public function sendResponse(){
 		header('Content-type: application/json');
 
 		if (count($this->errors)>0){
 			$this->response = array();
-			$this->response['status']= "400";
+			$this->response['status']= isset($this->status) ? $this->status : "400";
 			$this->response['errors'] = $this->errors;
 
 

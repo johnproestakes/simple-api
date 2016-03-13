@@ -17,7 +17,7 @@ class APIRouter {
       strlen($this->basePath())+1,
       strlen($_SERVER['REDIRECT_URL'])));
       $route = array_map(array($this,'hyphenToUnderscore'), $route);
-      print_r($route);
+      //print_r($route);
     return $route;
   }
   function routeToController(){
@@ -30,7 +30,21 @@ class APIRouter {
         if(isset($directive[2]) && method_exists($cmd, $directive[2])){
           //call method;
           $cmd->$directive[2]();
+        } else {
+          $API = SimpleAPI::getInstance();
+          $API
+            ->statusCode("404")
+            ->logError("controller or method does not exist")
+            ->sendResponse();
+          die();
         }
+      } else {
+        $API = SimpleAPI::getInstance();
+        $API
+          ->statusCode("404")
+          ->logError("controller or method does not exist")
+          ->sendResponse();
+        die();
       }
 
     }
