@@ -39,7 +39,7 @@ class hello {
 
 When you go to the following request uri: /v1/hello/world, you will see the following response:
 
-    {status:"200", response:"hello world"}
+    {"status":"200", "response":"hello world"}
 
 ## Log errors
 It's easy to log errors and set error codes. The code below will do the trick:
@@ -62,3 +62,5 @@ class hello {
     }
   }
 ```
+The above method will return the following response:
+  {"errors":["There is no Earth!"], "status":"400"}
